@@ -1,0 +1,17 @@
+li {
+  padding: 10px 0;
+  display: inline;
+}
+li a {
+  color: rgb(133, 128, 128);
+  text-decoration: none;
+}
+li + li::before {
+  display: inline-block;
+  transform: rotate(15deg);
+  border-right: 0.1em solid currentColor;
+  margin: 0 0.5em;
+  height: 0.8em;
+  content: "";
+  color: rgb(100, 98, 98);
+}
