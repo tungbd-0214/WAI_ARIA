@@ -3,10 +3,11 @@ import styles from "./Breadcrumb.module.css";
 import BreadcrumbItem from "./BreadcrumbItem";
 
 const Breadcrumb = (props) => {
+  const lastIndex = props.items.length;
   return (
-    <nav aria-label="Breadcrumb" className={`${styles.breadcrumb}`}>
+    <nav aria-label="Breadcrumb" className={styles.breadcrumb}>
       <ol>
-        {props.breadcrumbItems.map(Element => <BreadcrumbItem href={Element.href} label={Element.label} key={Math.random()}/>)}
+        {props.items.map(item => <BreadcrumbItem href={item.href} label={item.label} key={item.id} lastIndex={lastIndex} index={item.id}/>)}
       </ol>
     </nav>
   );
