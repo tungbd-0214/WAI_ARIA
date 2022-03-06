@@ -1,6 +1,5 @@
-import logo from "./logo.svg";
 import "./App.css";
-import BreadCrumb from "./components/BreadCrumb";
+import BreadCrumb from "./components/breadcrumb/Breadcrumb";
 function App() {
   return <BreadCrumb />;
 }
