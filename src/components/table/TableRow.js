@@ -6,7 +6,7 @@ const TableRow = (props) => {
 
   return (
     <div role="row" className={styles["tableRow"]}>
-        {props.contents.map((content) => <TableCell label={content} key={content} header={props.header}/>)}
+        {props.rowContent.map((cell) => <TableCell label={cell} key={cell} header={props.header}/>)}
     </div>
   )
 }

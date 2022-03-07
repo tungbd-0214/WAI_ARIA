@@ -22,7 +22,7 @@ function App() {
       href : "../../#aria_ex/#breadcrumb/index.html",
     }
   ] 
- const tableItems = [
+ const studensTable = [
    ["First Name","Last Name","Company","Address","Unique Id"],
    ["Fred","JackSon","Acme, Inc.","123 Broad St.","Ahs12"],
    ["Sara","James","Acme, Inc.","123 Broad St.","Sgd26"],
@@ -35,7 +35,7 @@ const tableDescription = "Students currently enrolled in WAI-ARIA 101 for the co
   return (
     <React.Fragment >
       <BreadCrumb items={breadcrumbItems}/>
-      <Table  description={tableDescription} contents={tableItems} />
+      <Table  description={tableDescription} contents={studensTable} />
     </React.Fragment>
   );
 }
