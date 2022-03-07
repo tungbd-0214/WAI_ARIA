@@ -7,7 +7,7 @@ const Breadcrumb = (props) => {
   return (
     <nav aria-label="Breadcrumb" className={styles.breadcrumb}>
       <ol>
-        {props.items.map(item => <BreadcrumbItem href={item.href} label={item.label} key={item.id} current={item.id === lastIndex ? true : false  }/>)}
+        {props.items.map((item,index) => <BreadcrumbItem href={item.href} label={item.label} key={index} current={index+1 === lastIndex ? true : false  }/>)}
       </ol>
     </nav>
   );
