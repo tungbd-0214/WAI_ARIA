@@ -4,7 +4,7 @@ import styles from "./BreadcrumbItem.module.css";
 const BreadcrumbItem = (props) => {
   return (
     <li className={styles["breadcrumbItem"]}>
-      {props.index === props.lastIndex ? (
+      {props.current ? (
         <a href={props.href} aria-current="page">
           {props.label}
         </a>
