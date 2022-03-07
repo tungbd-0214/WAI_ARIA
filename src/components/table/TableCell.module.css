@@ -1,0 +1,10 @@
+.tableCell,
+.columnHeader {
+  display: table-cell;
+  padding: 0.125em 0.25em;
+  width: 8em;
+}
+.columnHeader {
+  font-weight: bold;
+  border-bottom: thin solid #888;
+}

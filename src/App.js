@@ -1,5 +1,7 @@
+import React from "react";
 import "./App.css";
 import BreadCrumb from "./components/breadcrumb/Breadcrumb";
+import Table from "./components/table/Table";
 
 function App() {
   const breadcrumbItems = [
@@ -20,8 +22,22 @@ function App() {
       href : "../../#aria_ex/#breadcrumb/index.html",
     }
   ] 
- 
-  return <BreadCrumb items={breadcrumbItems}/>;
+ const tableItems = [
+   ["First Name","Last Name","Company","Address","Unique Id"],
+   ["Fred","JackSon","Acme, Inc.","123 Broad St.","Ahs12"],
+   ["Sara","James","Acme, Inc.","123 Broad St.","Sgd26"],
+   ["Ralph","Jefferson","XYZ, Inc.","456 Main St.","Hsu12"],
+   ["Nancy","Jensen","XYZ, Inc.","456 Main St.","kgs98"]
+  ]
+
+const tableDescription = "Students currently enrolled in WAI-ARIA 101 for the coming semester"
+
+  return (
+    <React.Fragment >
+      <BreadCrumb items={breadcrumbItems}/>
+      <Table  description={tableDescription} contents={tableItems} />
+    </React.Fragment>
+  );
 }
 
 export default App;

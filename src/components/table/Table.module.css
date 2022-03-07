@@ -1,0 +1,13 @@
+.annotate {
+  font-style: italic;
+  color: #366ed4;
+}
+
+.table {
+  display: table;
+}
+
+.table > div[id] {
+  display: table-caption;
+  font-style: italic;
+}
