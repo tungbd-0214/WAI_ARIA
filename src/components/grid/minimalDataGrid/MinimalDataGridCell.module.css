@@ -1,0 +1,25 @@
+.gridCell {
+	width : 100%;
+  padding: 15px 30px;
+	font-weight: 500;
+	box-sizing: border-box;
+	border-bottom :1px solid #a7abad ;
+}
+.gridCell[header="true"] {
+	font-weight: 800;
+}
+
+.gridCell a{
+	color : rgb(19, 145, 19);
+	text-decoration: none;
+}
+.gridCell a:hover {
+	color : #000;
+}
+.gridCell:focus,
+.gridCell *:focus,
+[role="grid"] [tabindex="0"]:focus {
+  outline: #005a9c;
+  outline-style: dotted;
+  outline-width: 3px;
+}

@@ -1,0 +1,25 @@
+.annotate {
+  font-style: italic;
+  color: #366ed4;
+}
+
+.minimalDataGrid {
+  display:flex;
+  flex-wrap: wrap;
+	width : max-content;
+	margin: 0 auto;
+}
+.minimalDataGrid:after {
+  flex: auto;
+  content:'';
+  flex-grow: 100;
+}
+
+.hidden {
+  display: none !important;
+}
+@media screen and (max-width: 1000px) {
+  #arrow-keys-indicator {
+    display: none;
+  }
+}
