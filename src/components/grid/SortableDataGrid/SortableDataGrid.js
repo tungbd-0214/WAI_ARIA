@@ -1,8 +1,8 @@
 import React from 'react'
-import styles from './MinimalDataGrid.module.css'
-import MinimalDataGridColumn from './MinimalDataGridColumn'
+import styles from './SortableDataGrid.module.css'
+import SortableDataGridColumn from './SortableDataGridColumn'
 
-const MinimalDataGrid = (props) => {
+const SortableDataGrid = (props) => {
 	const gridLabels = Object.keys(props.gridData[0])
 	const gridColumns = gridLabels.map(
 		column => {
@@ -47,18 +47,19 @@ const MinimalDataGrid = (props) => {
 			}
 	}
 	const editableColumns = ['description']
+	const sortableColumns = ['amount']
 	return (
 			<div className={styles.container} onKeyDown={keyDownFn}>
-					<h3 className={styles.grid1Label}>
+					<h3 className={styles.grid2Label}>
 							{props.label}
 					</h3>
-					<div role="grid" className={styles.minimalDataGrid}
-								 aria-labelledby="grid1Label">
+					<div role="grid" className={styles.sortableDataGrid}
+								 aria-labelledby="grid2Label">
 									{gridColumns.map(
-										column => <MinimalDataGridColumn  key = {column.key} label ={column.label} content={column.content} editable={editableColumns.includes(column.key)}/>)}
+										column => <SortableDataGridColumn  key = {column.key} label ={column.label} content={column.content} editable={editableColumns.includes(column.key)} sortable={sortableColumns.includes(column.key)}/>)}
 					</div>
 			 </div>
 	)
 } 
 
-export default MinimalDataGrid; 
+export default SortableDataGrid; 

@@ -2,18 +2,18 @@
   font-style: italic;
   color: #366ed4;
 }
-.grid1Label {
-			text-align: center;
-			color : #366ed4;
+.grid2Label {
+	text-align: center;
+	color : #366ed4;
 }
 
-.minimalDataGrid {
+.sortableDataGrid {
   display:flex;
   flex-wrap: wrap;
 	width : max-content;
 	margin: 0 auto;
 }
-.minimalDataGrid:after {
+.sortableDataGrid:after {
   flex: auto;
   content:'';
   flex-grow: 100;

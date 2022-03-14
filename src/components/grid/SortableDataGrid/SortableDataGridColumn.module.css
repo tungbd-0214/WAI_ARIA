@@ -1,0 +1,7 @@
+
+.gridColumn {
+	display: inline-block;
+  white-space: nowrap;
+  flex:1;
+  text-align: left;
+}
