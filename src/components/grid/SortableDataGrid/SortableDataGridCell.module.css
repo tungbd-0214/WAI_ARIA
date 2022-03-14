@@ -56,3 +56,6 @@
 .hidden {
   display: none !important;
 }
+.editing{
+	padding-bottom : 12px
+}
