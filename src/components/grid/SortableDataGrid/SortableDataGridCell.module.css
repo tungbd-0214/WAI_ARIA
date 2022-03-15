@@ -59,3 +59,50 @@
 .editing{
 	padding-bottom : 12px
 }
+.selectCell {
+	padding : 10.5px 30px;
+}
+button {
+  cursor: pointer;
+  font-size: 110%;
+}
+
+.menu-wrapper {
+  position: relative;
+}
+.menuButton {
+	padding : 1px 6px;
+	margin : 0;
+	font-weight: 500;
+	/* font-weight: 400;
+	font-size: 13.33px; */
+}
+.menu {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+}
+
+.menu .menuItem {
+  list-style: none;
+}
+
+.menu {
+  padding: 0;
+  width: 8em;
+  border: thin solid black;
+  background-color: #eee;
+	border-radius: 2px;
+}
+
+.menuItem {
+  padding: 0.5em;
+	margin : 4px 0 8px;
+	cursor: pointer;
+}
+
+.menuItem:focus,
+.menuItem:hover {
+  background-color: #fff;
+}

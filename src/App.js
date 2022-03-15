@@ -43,20 +43,20 @@ function App() {
 		{date : "06-Jan-16", type : "Debit" , description : {desc:"Cutey's Salon", href: "#"} , amount : "$700.00" , balance : "$995,532.00"},
 	]
 	const grid2Items = [
-		{date : "01-Jan-16", type : "Deposit" , description :"Cash Deposit",category:"Income", amount : "$1,000,000.00" , balance : "$1,000,000.00"},
-		{date : "02-Jan-16", type : "Debit" , description :"Down Town Grocery",category:"Income", amount : "$250.00" , balance : "$999,750.00"},
-		{date : "03-Jan-16", type : "Debit" , description :"Hot Coffee",category:"Income", amount : "$9.00" , balance : "$999,741.00"},
-		{date : "04-Jan-16", type : "Debit" , description :"The Filling Station", category:"Income", amount : "$88.00" , balance : "$999,653.00"},
-		{date : "05-Jan-16", type : "Debit" , description :"Tinker's Hardware", category:"Income", amount : "$3,421.00" , balance : "$996,232.00"},
-		{date : "06-Jan-16", type : "Debit" , description :"Cutey's Salon", category:"Income", amount : "$700.00" , balance : "$995,532.00"},
+		{date : "01-Jan-16", type : "Deposit" , description :"Cash Deposit",category:"Income", amount : 1000000.00 , balance : "$1,000,000.00"},
+		{date : "02-Jan-16", type : "Debit" , description :"Down Town Grocery",category:"Groceries", amount : 250.00 , balance : "$999,750.00"},
+		{date : "03-Jan-16", type : "Debit" , description :"Hot Coffee",category:"Dining Out", amount : 9.00 , balance : "$999,741.00"},
+		{date : "04-Jan-16", type : "Debit" , description :"The Filling Station", category:"Auto", amount : 88.00 , balance : "$999,653.00"},
+		{date : "05-Jan-16", type : "Debit" , description :"Tinker's Hardware", category:"HouseHold", amount : 3421.00 , balance : "$996,232.00"},
+		{date : "06-Jan-16", type : "Debit" , description :"Cutey's Salon", category:"Beauty", amount : 700.00 , balance : "$995,532.00"},
 	]
- 
+ const categoryOptions = ['Income','Groceries','Dining Out','Auto','Household','Beauty']
   return (
     <React.Fragment>
       <BreadCrumb items={breadcrumbItems}/>
       <Table  description={tableDescription} contents={studensTable} />
 			<MinimalDataGrid gridData={grid1Items} label="Minimal Data Grid"/>
-			<SortableDataGrid gridData= {grid2Items} label="Sortable Data Grid with editable cells"/>
+			<SortableDataGrid gridData= {grid2Items} label="Sortable Data Grid with editable cells" category={categoryOptions}/>
     </React.Fragment>
   );
 }

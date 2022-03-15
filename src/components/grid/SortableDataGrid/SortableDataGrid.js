@@ -48,6 +48,7 @@ const SortableDataGrid = (props) => {
 	}
 	const editableColumns = ['description']
 	const sortableColumns = ['amount']
+	const selectableColumns = ['category']
 	return (
 			<div className={styles.container} onKeyDown={keyDownFn}>
 					<h3 className={styles.grid2Label}>
@@ -55,8 +56,17 @@ const SortableDataGrid = (props) => {
 					</h3>
 					<div role="grid" className={styles.sortableDataGrid}
 								 aria-labelledby="grid2Label">
-									{gridColumns.map(
-										column => <SortableDataGridColumn  key = {column.key} label ={column.label} content={column.content} editable={editableColumns.includes(column.key)} sortable={sortableColumns.includes(column.key)}/>)}
+									{gridColumns.map( 
+										column =>
+										<SortableDataGridColumn  
+											key = {column.key} 
+											label ={column.label} 
+											content={column.content} 
+											editable={editableColumns.includes(column.key)} 
+											sortable={sortableColumns.includes(column.key)}
+											selectable={selectableColumns.includes(column.key)}
+											categoryOptions={props.category}
+											/>)}
 					</div>
 			 </div>
 	)
