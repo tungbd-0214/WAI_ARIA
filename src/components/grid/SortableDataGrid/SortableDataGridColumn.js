@@ -2,7 +2,6 @@ import React from 'react'
 import styles from './SortableDataGridColumn.module.css'
 import SortableDataGridCell from './SortableDataGridCell'
 
-
 const SortableDataGridColumn = (props) => {
 
 	const separator = numb => {
@@ -12,7 +11,8 @@ const SortableDataGridColumn = (props) => {
 	}
 	return (
 		<div className={styles.gridColumn}>
-			<SortableDataGridCell header="true" label={props.label}/>
+			{props.sortable && <SortableDataGridCell header="true" label={props.label} sortFn={props.sortFn}/>}
+			{!props.sortable && <SortableDataGridCell header="true" label={props.label}/>}
 				 {props.content.map((cellLabel,index) => 
 				 					<SortableDataGridCell  
 									 			editable={props.editable} 
@@ -23,7 +23,7 @@ const SortableDataGridColumn = (props) => {
 												label={props.label !== 'AMOUNT' ? cellLabel :`$${separator(cellLabel)}.00`} 
 												id={`Grid2_${props.label}_${index}`}
 												selectOptions={props.categoryOptions}
-									/>)} 
+									/>)}
 		</div>
 	)
 }

@@ -21,7 +21,7 @@ const SortableDataGridCell = (props) => {
 	}
 	const selectModeOnHangler = (event) => {
 		document.querySelector(`#${event.target.id}`).blur();
-		setIsSelecting(true)
+		setIsSelecting(prevState => !prevState)
 	}
 	const selectModeOffHandler = () => {
 		setIsSelecting(false)
@@ -65,7 +65,7 @@ const SortableDataGridCell = (props) => {
 									</li>)}
 							</ul>
 			</div>}
-		{!props.editable && !props.selectable && <div id={props.id} rold="cell" tabindex={props.tabindex} header={props.header} className={styles.gridCell}>{props.label}</div>}
+		{!props.editable && !props.selectable && <div id={props.id} rold="cell" tabindex={props.tabindex} header={props.header} className={styles.gridCell} onClick={props.sortFn}>{props.label}</div>}
 		</React.Fragment>
 	)
 }

@@ -1,15 +1,34 @@
-import React from 'react'
+import React, {useState}from 'react'
 import styles from './SortableDataGrid.module.css'
 import SortableDataGridColumn from './SortableDataGridColumn'
 
 const SortableDataGrid = (props) => {
+	const [sortedGridData,setSortedGridData] = useState(props.gridData);
+	const [order, setOrder] = useState("ASCEND")
 	const gridLabels = Object.keys(props.gridData[0])
+
+	const sortGridDataHandler = () => {
+		for ( let i = 0; i < props.gridData.length - 1; i++)  {
+			// Last i elements are already in place
+			for (let j = 0; j < props.gridData.length-i-1; j++){
+				if ((order === "ASCEND" && props.gridData[j].amount > props.gridData[j+1].amount) || (order === "DESCEND" && props.gridData[j].amount < props.gridData[j+1].amount))
+				{
+					const temp = props.gridData[j]
+					props.gridData[j] = props.gridData[j+1]
+					props.gridData[j+1]=temp
+				}
+			}
+		}  
+		setSortedGridData(props.gridData);
+		if(order === "ASCEND") {setOrder("DESCEND")};
+		if(order === "DESCEND") {setOrder("ASCEND")};
+	}
 	const gridColumns = gridLabels.map(
 		column => {
 		return {
 						key : column, 
 						label : column.toUpperCase(), 
-						content : props.gridData.map(row => row[column]),
+						content : sortedGridData.map(row => row[column]),
 					 }
 				}
 		)
@@ -66,6 +85,7 @@ const SortableDataGrid = (props) => {
 											sortable={sortableColumns.includes(column.key)}
 											selectable={selectableColumns.includes(column.key)}
 											categoryOptions={props.category}
+											sortFn={sortGridDataHandler}
 											/>)}
 					</div>
 			 </div>
