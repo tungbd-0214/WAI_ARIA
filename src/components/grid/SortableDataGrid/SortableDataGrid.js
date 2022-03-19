@@ -3,32 +3,42 @@ import styles from './SortableDataGrid.module.css'
 import SortableDataGridColumn from './SortableDataGridColumn'
 
 const SortableDataGrid = (props) => {
-	const [sortedGridData,setSortedGridData] = useState(props.gridData);
+	const [updateGridData,setUpdateGridData] = useState(props.gridData);
 	const [order, setOrder] = useState("ASCEND")
-	const gridLabels = Object.keys(props.gridData[0])
+	const gridLabels = Object.keys(updateGridData[0])
 
 	const sortGridDataHandler = () => {
-		for ( let i = 0; i < props.gridData.length - 1; i++)  {
-			// Last i elements are already in place
-			for (let j = 0; j < props.gridData.length-i-1; j++){
-				if ((order === "ASCEND" && props.gridData[j].amount > props.gridData[j+1].amount) || (order === "DESCEND" && props.gridData[j].amount < props.gridData[j+1].amount))
-				{
-					const temp = props.gridData[j]
-					props.gridData[j] = props.gridData[j+1]
-					props.gridData[j+1]=temp
-				}
-			}
-		}  
-		setSortedGridData(props.gridData);
+		// const len = props.gridData.length;
+		if(order === "DESCEND") {
+			setUpdateGridData( prevData => [].concat(prevData)
+			.sort((a, b) => b.amount- a.amount)
+			.map((item) => item))
+		} else {
+			setUpdateGridData( prevData => [].concat(prevData)
+			.sort((a, b) => a.amount- b.amount)
+			.map((item) => item))
+		}
 		if(order === "ASCEND") {setOrder("DESCEND")};
 		if(order === "DESCEND") {setOrder("ASCEND")};
+	}
+
+	const updateGridDataHandler = (key,id,value) => {
+			setUpdateGridData(prevData =>prevData.map((item,index) => {
+				if(index === id) {
+					item[key] = value;
+					return item;
+				} else {
+					return item;
+				}
+        
+    }));
 	}
 	const gridColumns = gridLabels.map(
 		column => {
 		return {
 						key : column, 
 						label : column.toUpperCase(), 
-						content : sortedGridData.map(row => row[column]),
+						content : updateGridData.map(row => row[column]),
 					 }
 				}
 		)
@@ -86,6 +96,7 @@ const SortableDataGrid = (props) => {
 											selectable={selectableColumns.includes(column.key)}
 											categoryOptions={props.category}
 											sortFn={sortGridDataHandler}
+											updateGridData={updateGridDataHandler}
 											/>)}
 					</div>
 			 </div>

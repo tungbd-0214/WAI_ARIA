@@ -1,12 +1,11 @@
 import React, {useState} from 'react' 
 import styles from './SortableDataGridCell.module.css'
 
-
-
 const SortableDataGridCell = (props) => {
-	const [updateText, setUpdateText] = useState(props.label)
 	const [editableOn,setEditableOn] = useState(false)
+	const [updateUIText,setUpdateUIText] = useState(props.label);
 	const [isSelecting, setIsSelecting] = useState(false)
+	// eslint-disable-next-line no-unused-vars
 	const [selectedCatelogy,setSelectedCategory] = useState(props.label);
 	const toggleEditModeOff = (event) => {
 		if(event.keyCode === 13) {
@@ -16,18 +15,20 @@ const SortableDataGridCell = (props) => {
 	const toggleEditModeOn = () => {
 		setEditableOn(true)
 	}
+	const selectModeOffHandler = () => {
+		setIsSelecting(false)
+	}
 	const updateTextHandler = (event) => {
-			setUpdateText(event.target.value)
+		setUpdateUIText(event.target.value)
+		props.updateGridData('description',props.cellIndex,event.target.value);
 	}
 	const selectModeOnHangler = (event) => {
 		document.querySelector(`#${event.target.id}`).blur();
 		setIsSelecting(prevState => !prevState)
 	}
-	const selectModeOffHandler = () => {
-		setIsSelecting(false)
-	}
 	const selectCategoryHandler = (event) => {
 			setSelectedCategory(event.target.getAttribute('data-value'));
+			props.updateGridData('category',props.cellIndex,event.target.getAttribute('data-value'));
 			selectModeOffHandler();
 	}
 	return (
@@ -38,11 +39,11 @@ const SortableDataGridCell = (props) => {
 						role="button"
 						tabindex={-1}
 						onClick={toggleEditModeOn}>
-				{updateText}
+				{props.label}
 			</span> 
 			<input className={`${styles["edit-text-input"]} ${editableOn ? '' : styles.hidden}`}
 						 tabindex= {0}
-						 value={updateText}
+						 value={updateUIText}
 						 defaultValue={props.label}
 						 onKeyDown={toggleEditModeOff}
 						 onChange={updateTextHandler}
@@ -56,8 +57,9 @@ const SortableDataGridCell = (props) => {
 							tabindex={-1}
 							id={props.id}
 							className={styles.menuButton}
-							onClick={selectModeOnHangler}>
-							{selectedCatelogy}
+							onClick={selectModeOnHangler}
+							>
+							{props.label}
 							</button>
 							<ul role="menu" id="menu1" className={`${styles.menu} ${isSelecting ? '' : styles.hidden}`}>
 									{props.selectOptions.map(option => <li role="menuitem" className={styles.menuItem} data-value={option} onClick={selectCategoryHandler}>
