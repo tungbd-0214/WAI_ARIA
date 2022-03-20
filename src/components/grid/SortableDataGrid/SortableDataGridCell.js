@@ -1,72 +1,63 @@
-import React, {useState} from 'react' 
+import React, {useState,useRef} from 'react' 
 import styles from './SortableDataGridCell.module.css'
 
 const SortableDataGridCell = (props) => {
-	const [editableOn,setEditableOn] = useState(false)
-	const [updateUIText,setUpdateUIText] = useState(props.label);
+	const [isEditting,setIsEditting] = useState(false)
 	const [isSelecting, setIsSelecting] = useState(false)
-	// eslint-disable-next-line no-unused-vars
-	const [selectedCatelogy,setSelectedCategory] = useState(props.label);
+	const descriptionRefInput = useRef('')
 	const toggleEditModeOff = (event) => {
 		if(event.keyCode === 13) {
-			setEditableOn(false);
+			setIsEditting(false);
+			props.updateGridData('description',props.cellIndex,descriptionRefInput.current.value);
 		}
 	}
 	const toggleEditModeOn = () => {
-		setEditableOn(true)
+			setIsEditting(true)
 	}
-	const selectModeOffHandler = () => {
+	const toggleSelectModeOff = (event) => {
 		setIsSelecting(false)
+		props.updateGridData('category',props.cellIndex,event.target.innerHTML);
 	}
-	const updateTextHandler = (event) => {
-		setUpdateUIText(event.target.value)
-		props.updateGridData('description',props.cellIndex,event.target.value);
-	}
-	const selectModeOnHangler = (event) => {
+	const toggleSelectModeOn = (event) => {
 		document.querySelector(`#${event.target.id}`).blur();
 		setIsSelecting(prevState => !prevState)
-	}
-	const selectCategoryHandler = (event) => {
-			setSelectedCategory(event.target.getAttribute('data-value'));
-			props.updateGridData('category',props.cellIndex,event.target.getAttribute('data-value'));
-			selectModeOffHandler();
 	}
 	return (
 		<React.Fragment >
 			{props.editable &&
-			<div id={props.id} role="cell" className={`${styles["editable-text"]} ${styles.gridCell} ${editableOn ? styles.editing : ''}`}>
-			<span className={`${styles["edit-text-button"]} ${editableOn ? styles.hidden : ''}`}
-						role="button"
-						tabindex={-1}
-						onClick={toggleEditModeOn}>
-				{props.label}
-			</span> 
-			<input className={`${styles["edit-text-input"]} ${editableOn ? '' : styles.hidden}`}
-						 tabindex= {0}
-						 value={updateUIText}
-						 defaultValue={props.label}
-						 onKeyDown={toggleEditModeOff}
-						 onChange={updateTextHandler}
-						 onBlur={()=> {setEditableOn(false)}}/> 	
-		</div>} 
-		{props.selectable && 
-		<div role="cell"  className={`${styles['menu-wrapper']} ${styles.gridCell} ${styles.selectCell}`}>
-							<button
-							aria-haspopup="true"
-							aria-controls="menu1"
+			<div id={props.id} role="cell" className={`${styles["editable-text"]} ${styles.gridCell} ${isEditting ? styles.editing : ''}`}>
+				<span className={`${styles["edit-text-button"]} ${isEditting ? styles.hidden : ''}`}
+							role="button"
 							tabindex={-1}
-							id={props.id}
-							className={styles.menuButton}
-							onClick={selectModeOnHangler}
-							>
-							{props.label}
-							</button>
-							<ul role="menu" id="menu1" className={`${styles.menu} ${isSelecting ? '' : styles.hidden}`}>
-									{props.selectOptions.map(option => <li role="menuitem" className={styles.menuItem} data-value={option} onClick={selectCategoryHandler}>
-									{option}
-									</li>)}
-							</ul>
-			</div>}
+							onClick={toggleEditModeOn}>
+					{props.label}
+				</span> 
+				<input className={`${styles["edit-text-input"]} ${isEditting ? '' : styles.hidden}`}
+							tabindex= {0}
+							defaultValue={props.label}
+							onKeyDown={toggleEditModeOff}
+							ref={descriptionRefInput}
+							onBlur={()=> {setIsEditting(false) }}/>
+			</div>} 
+		{props.selectable && 
+			<div role="cell"  className={`${styles['menu-wrapper']} ${styles.gridCell} ${styles.selectCell}`}>
+								<button
+								aria-haspopup="true"
+								aria-controls="menu1"
+								tabindex={-1}
+								id={props.id}
+								className={styles.menuButton}
+								onClick={toggleSelectModeOn}
+								>
+								{props.label}
+								</button>
+								<ul role="menu" id="menu1" className={`${styles.menu} ${isSelecting ? '' : styles.hidden}`}>
+										{props.selectOptions.map(
+										option => <li role="menuitem" className={styles.menuItem} onClick={toggleSelectModeOff} >
+																{option}
+															</li>)}
+								</ul>
+				</div>}
 		{!props.editable && !props.selectable && <div id={props.id} rold="cell" tabindex={props.tabindex} header={props.header} className={styles.gridCell} onClick={props.sortFn}>{props.label}</div>}
 		</React.Fragment>
 	)

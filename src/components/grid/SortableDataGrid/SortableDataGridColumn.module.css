@@ -1,7 +1,13 @@
 
 .gridColumn {
 	display: inline-block;
-  white-space: nowrap;
-  flex:1;
+  /* white-space: nowrap; */
   text-align: left;
+	flex-grow: 1;
+}
+.gridColumn:first-child {
+	width : 150px;
+ }
+.hidden {
+  display: none !important;
 }

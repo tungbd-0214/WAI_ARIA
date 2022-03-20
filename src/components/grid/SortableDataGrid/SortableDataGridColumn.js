@@ -9,11 +9,10 @@ const SortableDataGridColumn = (props) => {
     str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return str.join(".");
 	}
-	
+
 	return (
-		<div className={styles.gridColumn}>
-			{props.sortable && <SortableDataGridCell header="true" label={props.label} sortFn={props.sortFn}/>}
-			{!props.sortable && <SortableDataGridCell header="true" label={props.label}/>}
+		<div className={`${styles.gridColumn} ${props.beHidden ? styles.hidden : ''}`}>
+			<SortableDataGridCell tabindex={-1} header="true" label={props.label} sortFn={props.sortable ? props.sortFn : ''}/>
 				 {props.content.map((cellLabel,index) => 
 				 					<SortableDataGridCell  
 									 			editable={props.editable} 

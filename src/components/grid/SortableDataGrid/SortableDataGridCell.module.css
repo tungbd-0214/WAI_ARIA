@@ -1,5 +1,4 @@
 .gridCell {
-	width : 100%;
   padding: 15px 30px;
 	font-weight: 500;
 	box-sizing: border-box;
@@ -39,7 +38,7 @@
   height: 25px;
   opacity: 0.6;
   position: absolute;
-  right: -40px;
+  right: -20px;
   top: 0;
   width: 26px;
 	cursor: pointer;

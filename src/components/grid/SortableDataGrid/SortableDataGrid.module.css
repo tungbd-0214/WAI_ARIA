@@ -10,14 +10,14 @@
 .sortableDataGrid {
   display:flex;
   flex-wrap: wrap;
-	width : max-content;
+	width : 1000px;
 	margin: 50px auto;
 	margin-bottom : 200px;
 }
 .sortableDataGrid:after {
   flex: auto;
   content:'';
-  flex-grow: 100;
+	flex-grow: 0.01;
 }
 
 .hidden {
@@ -27,4 +27,7 @@
   #arrow-keys-indicator {
     display: none;
   }
+}
+.toggle_column_btn {
+		margin-left : 20%;
 }
